@@ -44,11 +44,13 @@ private Button homeBtn;
         ImageObject backgroundImage=new ImageObject(0,0,"background_rinbow.png");
         // System.out.println("width "+screenWidth+ " \nheight "+screenHeight);
 
-        stage.addActor(backgroundImage);
-
-        GameObject.setWorldBounds(backgroundImage.getWidth(),backgroundImage.getHeight());
 
         backgroundImage.setImageToScreen();
+        GameObject.setWorldBounds(backgroundImage.getWidth(),backgroundImage.getHeight());
+//        GameObject.setWorldBounds(200,200);
+        stage.addActor(backgroundImage);
+
+
 
         initHomeBtn();
 
@@ -118,7 +120,7 @@ stage.act();
         player.setMoveX(touchpad.getKnobPercentX());
         player.setMoveY(touchpad.getKnobPercentY());
 
-        collectStar();
+//        collectStar();
 
 
     }
@@ -199,15 +201,16 @@ height=starFish.getHeight()*1.2f;
                 }
 
                 starFish = new StarFish(x, y);
-                stage.addActor(starFish);
+//                stage.addActor(starFish);
                 //scale it down
 //                float factor=0.4f;
                 starFish.setBounds(x,y,width,height);
                 //starFish.setOrigin(starFish.getWidth()/2,starFish.getHeight()/2);//take the origin of the modified size starfish
-                starFish.updateOrigin();
-                if(isStarPlace(starFish)==false||isStarTurtleCollide(starFish,player)) {
+//                starFish.updateOrigin();
+                if(isStarPlace(starFish)==false|| isStarPlayerCollide(starFish,player)) {//not accurate isStarPlayerCollide(starFish,player) at all need fixes
                     loop=true;
                     starFish.remove();
+
                 }else {
                     loop=false;
                 }
@@ -252,9 +255,9 @@ int winPoints=0;
         return true;
     }
 
-    private boolean isStarTurtleCollide(StarFish starFish, Player turtle){
+    private boolean isStarPlayerCollide(StarFish starFish, Player player){
 
-        return starFish.overlaps(turtle);
+        return player.overlaps(starFish);
     }
 
 

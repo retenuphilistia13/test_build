@@ -3,6 +3,7 @@ package com.mygdx.game.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class ImageObject extends GameObject{
     AnimationFrame animationFrame;
@@ -59,15 +60,26 @@ public class ImageObject extends GameObject{
 public void setImageToScreen(){
 
     float multi=1.0f;
+    multi=1.0f;
 
-    do{
-        this.setSize(this.getWidth()*multi,this.getHeight()*multi);
-//
-        this.setWidth(this.getWidth()*multi);
-        this.setHeight(this.getHeight()*multi);
+    while(this.getWidth()> Gdx.graphics.getWidth()&&this.getHeight()>Gdx.graphics.getHeight())
+    {
+
+        this.setBounds(0,0,this.getWidth()*multi,this.getHeight()*multi);
+        multi-=0.1;
+        bounds=new Rectangle(0,0,this.getWidth()*multi,this.getHeight()*multi);
+    }
+
+    multi=1.0f;
+    while(this.getWidth()<= Gdx.graphics.getWidth()||this.getHeight()<=Gdx.graphics.getHeight()){
+
+        this.setBounds(0,0,this.getWidth()*multi,this.getHeight()*multi);
         multi+=0.1;
+        bounds=new Rectangle(0,0,this.getWidth()*multi,this.getHeight()*multi);
+    }
 
-    }while(this.getWidth()<= Gdx.graphics.getWidth()||this.getHeight()<=Gdx.graphics.getHeight());
+
+
 }
 
 

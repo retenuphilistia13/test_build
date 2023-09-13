@@ -1,12 +1,7 @@
 package com.mygdx.game.actors;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import static com.mygdx.game.GameConstants.screenHeight;
 import static com.mygdx.game.GameConstants.screenWidth;
@@ -17,7 +12,7 @@ public class Player extends DynamicGameObject{
 
     //private Animation<TextureRegion> walkAnimation;
 
-    AnimationFrame walkFrame;
+    AnimationFrame walkFrame, idleFrame;
 
     private float controlX,controlY;
 
@@ -34,6 +29,8 @@ public class Player extends DynamicGameObject{
         rotation=Rotation.RIGHT;
         else if(mX<0){
             rotation=Rotation.LEFT;
+        }else{
+            rotation=Rotation.CENTER;
         }
 
 
@@ -58,7 +55,7 @@ public class Player extends DynamicGameObject{
         Color c = getColor(); // used to apply tint color effect
         batch.setColor(c.r, c.g, c.b, c.a);
 
-if(animationState==Animation.IDLE) {
+if(animationState==Animation.RUN) {
     if (isVisible() && walkFrame.animation != null)
         batch.draw(walkFrame.animation.getKeyFrame(elapsedTime),
                 getX(), getY(), getOriginX(), getOriginY(),
@@ -72,15 +69,15 @@ if(animationState==Animation.IDLE) {
 
 }
 
-else if(animationState==Animation.RUN) {
+else if(animationState==Animation.IDLE) {
 
-    if (isVisible() && walkFrame.animation != null)
-        batch.draw(walkFrame.animation.getKeyFrame(elapsedTime),
+    if (isVisible() && idleFrame.animation != null)
+        batch.draw(idleFrame.animation.getKeyFrame(elapsedTime),
                 getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 
     else if (isVisible()) {
-        batch.draw(walkFrame.getTextureRegion(),
+        batch.draw(idleFrame.getTextureRegion(),
                 getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
@@ -104,7 +101,9 @@ else if(animationState==Animation.RUN) {
 clearActions();//in case
 
 //        Action move= Actions.moveBy(position.x,getY());
-if(position.x==0){
+if(rotation==rotation.CENTER){
+    // Set the origin at the center of the player
+    setOrigin(getWidth() / 2, getHeight() / 2);
     animationState=Animation.IDLE;
 }
         if (rotation==rotation.LEFT) {
@@ -120,6 +119,7 @@ if(position.x==0){
             setOrigin(getWidth() / 2, getHeight() / 2);
             animationState=Animation.RUN;
         }
+
 //        addAction(move);
 if(position.x>screenWidth-getWidth()){
     position.x=screenWidth-getWidth();
@@ -176,9 +176,8 @@ if(position.x>screenWidth-getWidth()){
 
         elapsedTime = 0;
 
-//        runFrame=new AnimationFrame(this);
-//        runFrame.loadAnimationFromFiles(runAnimation,0.1f,true);
-
+        idleFrame =new AnimationFrame(this);
+        idleFrame.loadTexture("g_idle(1).png");
 
         walkFrame=new AnimationFrame(this);
         walkFrame.loadAnimationFromFiles(fileAnimation,0.1f,true);

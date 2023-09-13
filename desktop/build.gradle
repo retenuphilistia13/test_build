@@ -14,6 +14,9 @@ task run(dependsOn: classes, type: JavaExec) {
     workingDir = project.assetsDir
     ignoreExitValue = true
 
+//     // Set the maximum heap size (e.g., 1GB)
+//     jvmArgs = ["-Xmx1g"] // Adjust the memory size as needed
+
     if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
         // Required to run on macOS
         jvmArgs += "-XstartOnFirstThread"

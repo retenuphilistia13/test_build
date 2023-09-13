@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameConstants;
 import com.mygdx.game.MyGdxGame;
 
+import com.mygdx.game.actors.ImageObject;
 import jdk.internal.net.http.common.Log;
 
 /**
@@ -34,35 +35,31 @@ import jdk.internal.net.http.common.Log;
 public class MenuScreen implements Screen {
 
     final MyGdxGame game;
-    private Texture badlogic;
+//    private Texture badlogic;
     private Skin mySkin;
     private Stage stage;
 
-    private SpriteBatch batch;
-
-    private Viewport screenPort;
-
-
+//    private SpriteBatch batch;
 //
+//    private Viewport screenPort;
 
-    /*mp3Sound.setLooping(true);
-        mp3Sound.setVolume(0.5f);
-        mp3Sound.play();*/
+
     public MenuScreen(final MyGdxGame game){
         this.game = game;
         game.myAssetManager.queueAddSkin();
         game.myAssetManager.manager.finishLoading();
         mySkin = game.myAssetManager.manager.get(GameConstants.skin);
 
-//        screenPort=new ScreenViewport();
+        ImageObject menuBackground=new ImageObject(0,0,"background.png");
 
-        badlogic = new Texture(Gdx.files.internal("background.png"));//gambul family
+        menuBackground.setImageToScreen();
+
         mySkin = new Skin(Gdx.files.internal(GameConstants.skin));
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        batch =new SpriteBatch();
+//        batch =new SpriteBatch();
 
 
         Label gameTitle = new Label("GAME MENU",mySkin,"default");
@@ -102,7 +99,7 @@ public class MenuScreen implements Screen {
             }
         });
 
-
+stage.addActor(menuBackground);
         stage.addActor(gameTitle);
         stage.addActor(startBtn);
         stage.addActor(settingsBtn);
@@ -122,9 +119,9 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-       batch.begin();
-       batch.draw(badlogic,0,0);
-       batch.end();
+//       batch.begin();
+//       batch.draw(badlogic,0,0);
+//       batch.end();
 
         stage.act();
         stage.draw();
@@ -155,9 +152,9 @@ public class MenuScreen implements Screen {
     @Override
     public void dispose() {
 
-
-        badlogic.dispose();
-        batch.dispose();
+//
+//        badlogic.dispose();
+//        batch.dispose();
         mySkin.dispose();
         stage.dispose();
 

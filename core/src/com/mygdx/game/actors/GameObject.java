@@ -25,7 +25,7 @@ public class GameObject extends Actor {
         return isBoundToWorld;
     }
 
-    public final Rectangle bounds;
+    public Rectangle bounds;
 
     private static com.badlogic.gdx.math.Rectangle playerWorldBounds;
     public GameObject (float x, float y, float width, float height) {
