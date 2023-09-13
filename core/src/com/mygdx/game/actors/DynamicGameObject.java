@@ -27,6 +27,51 @@ public class DynamicGameObject extends GameObject{
     @Override
     public void act(float delta) {
         super.act(delta);
+        setX(position.x);
+        setY(position.y);
+
+    }
+
+    protected void movingPhysics(float dt){
+//
+//        if (getX() < 0) {
+//            isBoundToWorld = true;
+//            setX(0);
+//            setVelocityVecX(-getVelocityVec().x);
+//            setAccelerationVecX(-getAccelerationVec().x);
+//
+//            repelAngle=180;
+//        }
+//
+//        // Check right edge
+//        if (getX() + getWidth() > worldBounds.width) {
+//            isBoundToWorld = true;
+//            setX(worldBounds.width - getWidth());
+//            setVelocityVecX(-getVelocityVec().x);
+//            setAccelerationVecX(-getAccelerationVec().x);
+//
+//            repelAngle=0;
+//        }
+//
+//        // Check bottom edge
+//        if (getY() < 0) {
+//            isBoundToWorld = true;
+//            setY(0);
+//            setVelocityVecY(-getVelocityVec().y);
+//            setAccelerationVecY(-getAccelerationVec().y);
+//
+//        }
+//
+//        // Check top edge
+//        if (getY() + getHeight() > worldBounds.height) {
+//            isBoundToWorld = true;
+//
+//            setVelocityVecY(-getVelocityVec().y);
+//            accel.y=-accel.y;
+//
+//            setY(worldBounds.height - getHeight());
+//
+//        }
     }
 
 }

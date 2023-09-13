@@ -56,7 +56,7 @@ public class MenuScreen implements Screen {
 
 //        screenPort=new ScreenViewport();
 
-        badlogic = new Texture(Gdx.files.internal("gambul_family.png"));//gambul family
+        badlogic = new Texture(Gdx.files.internal("background.png"));//gambul family
         mySkin = new Skin(Gdx.files.internal(GameConstants.skin));
 
         stage = new Stage();
@@ -121,13 +121,13 @@ public class MenuScreen implements Screen {
         //Gdx.gl.glClearColor(0,0,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act();
-        stage.draw();
 
        batch.begin();
        batch.draw(badlogic,0,0);
        batch.end();
 
+        stage.act();
+        stage.draw();
 
     }
 

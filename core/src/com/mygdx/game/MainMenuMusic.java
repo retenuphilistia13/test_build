@@ -7,16 +7,16 @@ public class MainMenuMusic {
 
   public  Music mainMusic;
 
-public void setMp3(int a){
+public void setMp3(int a){//not important
 
     switch(a){
         case 1:
 
-            mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/mao-zedong-red-sun-in-the-sky.ogg"));
+            mainMusic = Gdx.audio.newMusic(Gdx.files.internal(GameConstants.backgroundMusic));
             break;
 
         default:
-            mainMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/mao-zedong-red-sun-in-the-sky.ogg"));
+            mainMusic = Gdx.audio.newMusic(Gdx.files.internal(GameConstants.backgroundMusic));
             break;
     }
 

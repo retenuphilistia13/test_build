@@ -8,9 +8,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-public class Player extends GameObject{
+import static com.mygdx.game.GameConstants.screenHeight;
+import static com.mygdx.game.GameConstants.screenWidth;
 
-    private TextureRegion textureRegion;
+public class Player extends DynamicGameObject{
+
 
 
     //private Animation<TextureRegion> walkAnimation;
@@ -27,12 +29,27 @@ public class Player extends GameObject{
 
     public void setMoveX(float mX){
 
-        controlX=mX*5;
+        position.x+=mX*5;
+        if(mX>0)
+        rotation=Rotation.RIGHT;
+        else if(mX<0){
+            rotation=Rotation.LEFT;
+        }
+
+
     }
 
     public void setMoveY(float mY){
 
-        controlY=mY*5;
+
+//        if(mY>0)
+//            rotation=Rotation.UP;
+//        else if(mY<0){
+//            rotation=Rotation.DOWN;
+//        }
+
+
+        position.y+=mY*5;
     }
 
     @Override
@@ -48,7 +65,7 @@ if(animationState==Animation.IDLE) {
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 
     else if (isVisible()) {
-        batch.draw(textureRegion,
+        batch.draw(walkFrame.getTextureRegion(),
                 getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
@@ -56,13 +73,14 @@ if(animationState==Animation.IDLE) {
 }
 
 else if(animationState==Animation.RUN) {
+
     if (isVisible() && walkFrame.animation != null)
         batch.draw(walkFrame.animation.getKeyFrame(elapsedTime),
                 getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 
     else if (isVisible()) {
-        batch.draw(textureRegion,
+        batch.draw(walkFrame.getTextureRegion(),
                 getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
@@ -85,24 +103,36 @@ else if(animationState==Animation.RUN) {
 
 clearActions();//in case
 
-        Action move= Actions.moveBy(controlX,getY());
-if(controlX==0){
+//        Action move= Actions.moveBy(position.x,getY());
+if(position.x==0){
     animationState=Animation.IDLE;
 }
-        if (controlX <0) {
+        if (rotation==rotation.LEFT) {
             // Flip the player horizontally
             setScaleX(-1);
             // Set the origin at the center of the player
             setOrigin(getWidth() / 2, getHeight() / 2);
             rotation=Rotation.LEFT;
             animationState=Animation.RUN;
-        } else if(controlX > 0){
+        } else if(rotation==rotation.RIGHT){
             rotation=Rotation.RIGHT;
             setScaleX(1); // Set it back to the original scale (no flip)
-
+            setOrigin(getWidth() / 2, getHeight() / 2);
             animationState=Animation.RUN;
         }
-        addAction(move);
+//        addAction(move);
+if(position.x>screenWidth-getWidth()){
+    position.x=screenWidth-getWidth();
+}else if(position.x<0){
+    position.x=0;
+}
+
+        if(position.y>screenHeight-getHeight()){
+            position.y=screenHeight-getHeight();
+        }else if(position.y<0){
+            position.y=0;
+        }
+
     }
     //end act/////
 
@@ -137,7 +167,6 @@ if(controlX==0){
         super(0,0,100,100);
 
 
-        textureRegion=new TextureRegion(new Texture(fileAnimation[0]));
 
         rotation=Rotation.RIGHT;
 

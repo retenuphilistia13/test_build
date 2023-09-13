@@ -18,6 +18,6 @@ public class MyAssetManager {
 
     }
     public void addMusic(){
-        manager.load("Sounds/mao-zedong-red-sun-in-the-sky.ogg", Music.class);
+        manager.load(GameConstants.backgroundMusic, Music.class);
     }
 }

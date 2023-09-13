@@ -32,7 +32,7 @@ public class MyGdxGame extends Game {
 		myAssetManager.addMusic();
 		myAssetManager.manager.finishLoading();
 
-		music = myAssetManager.manager.get("Sounds/mao-zedong-red-sun-in-the-sky.ogg", Music.class);
+		music = myAssetManager.manager.get(GameConstants.backgroundMusic, Music.class);
 
 		music.setLooping(true);
 		music.play();
@@ -48,12 +48,13 @@ public class MyGdxGame extends Game {
 	}
 
 	public void gotoSettingsScreen(){
+		music.pause();
 		SettingsScreen settingsScreen = new SettingsScreen(this);
 		setScreen(settingsScreen);
 	}
 
 	public void gotoGameScreen(){
-		music.pause();
+
 		GameScreen gameScreen = new GameScreen(this);
 		setScreen(gameScreen);
 	}

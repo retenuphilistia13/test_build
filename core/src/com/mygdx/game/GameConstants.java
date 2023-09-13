@@ -12,6 +12,7 @@ public class GameConstants {
     public static final String skin = "skin/awesome_skin.json";
     public static final String skinAtlas = "skin/awesome_skin.atlas";
 
+    public static final String backgroundMusic="Sounds/gambull_theme.ogg";
 
     public static final int screenWidth = Gdx.graphics.getWidth();
     public static final int screenHeight = Gdx.graphics.getHeight();

@@ -13,19 +13,30 @@ public class StarFish extends DynamicGameObject {
     AnimationFrame animationFrame;
 
     private Animation animationState;
-    public StarFish(){
-        super(10,10,100,100);
+    public StarFish(float x,float y){
+        super(x,y,100,100);
 
         elapsedTime=0;
         animationFrame=new AnimationFrame(this);
 
-        animationFrame.loadTexture("assets/starfish.png");
+        animationFrame.loadTexture("starfish.png");
         animationState=Animation.IDLE;
 //        setAcceleration(20);
 //        setMaxSpeed(2);
 
     }
+    public StarFish(){
+        super(0,0,100,100);
 
+        elapsedTime=0;
+//        animationFrame=new AnimationFrame(this);
+
+//        animationFrame.loadTexture("assets/starfish.png");
+//        animationState=Animation.IDLE;
+//        setAcceleration(20);
+//        setMaxSpeed(2);
+
+    }
 //
 //    public StarFish(float x, float y, Stage s){
 //        super(x,y,s);
